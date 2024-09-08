@@ -10,7 +10,8 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/products');
+        // Update the URL to point to the deployed backend
+        const response = await axios.get('https://mern-cart-server.onrender.com/products');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);

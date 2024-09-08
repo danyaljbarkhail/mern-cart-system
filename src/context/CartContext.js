@@ -13,7 +13,8 @@ const CartProvider = ({ children }) => {
     const fetchCart = async () => {
       try {
         const userId = 'user-123'; // Replace with actual user ID
-        const response = await axios.get(`http://localhost:5000/cart/${userId}`);
+        // Use the live backend URL
+        const response = await axios.get(`https://mern-cart-server.onrender.com/cart/${userId}`);
         setCart(response.data.products || []);
         setCartId(response.data.cartId);  // Store the cartId for future use
       } catch (error) {
@@ -37,7 +38,7 @@ const CartProvider = ({ children }) => {
     try {
       console.log('Adding product to cart:', product);
 
-      const response = await axios.post('http://localhost:5000/cart', {
+      const response = await axios.post('https://mern-cart-server.onrender.com/cart', {
         userId: 'user-123', // Replace with actual user ID
         productId: product._id,
         quantity: 1,
@@ -62,7 +63,7 @@ const CartProvider = ({ children }) => {
 
     try {
       if (cartId) {
-        const response = await axios.put(`http://localhost:5000/cart/${cartId}/${productId}`, {
+        const response = await axios.put(`https://mern-cart-server.onrender.com/cart/${cartId}/${productId}`, {
           quantity: newQuantity,
         });
         setCart(response.data.products);  // Sync cart with backend response
@@ -79,7 +80,7 @@ const CartProvider = ({ children }) => {
 
     try {
       if (cartId) {
-        const response = await axios.delete(`http://localhost:5000/cart/${cartId}/${productId}`);
+        const response = await axios.delete(`https://mern-cart-server.onrender.com/cart/${cartId}/${productId}`);
         setCart(response.data.products);  // Sync cart with backend response
       }
     } catch (error) {
